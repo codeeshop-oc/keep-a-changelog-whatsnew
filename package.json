@@ -1,7 +1,8 @@
 {
-  "name": "@release-it/keep-a-changelog",
-  "version": "4.0.0",
-  "description": "Keep-a-changelog plugin for release-it",
+  "name": "@codeeshop/keep-a-changelog-whatsnew",
+  "version": "4.0.1",
+  "private": false,
+  "description": "Keep-a-changelog-whatsnew plugin for release-it",
   "type": "module",
   "exports": "./index.js",
   "scripts": {
@@ -12,7 +13,7 @@
     "release",
     "release-it",
     "release-it-plugin",
-    "keep-a-changelog",
+    "keep-a-changelog-whatsnew",
     "changelog",
     "changes",
     "unreleased"
@@ -20,10 +21,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/release-it/keep-a-changelog.git"
+    "url": "https://github.com/codeeshop/keep-a-changelog-whatsnew.git"
   },
-  "homepage": "https://github.com/release-it/keep-a-changelog#readme",
-  "bugs": "https://github.com/release-it/keep-a-changelog/issues",
+  "homepage": "https://github.com/codeeshop/keep-a-changelog-whatsnew#readme",
+  "bugs": "https://github.com/codeeshop/keep-a-changelog-whatsnew/issues",
   "author": {
     "name": "Lars Kappert",
     "email": "lars@webpro.nl",

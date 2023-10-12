@@ -36,7 +36,7 @@ mock({
 
 const readFile = file => fs.readFileSync(file).toString();
 
-const namespace = 'keep-a-changelog';
+const namespace = 'keep-a-changelog-whatsnew';
 
 test('should throw for missing changelog file', async t => {
   const options = { [namespace]: {} };

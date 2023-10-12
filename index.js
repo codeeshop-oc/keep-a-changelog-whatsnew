@@ -28,9 +28,11 @@ const defaultVersionUrlFormats = {
 class KeepAChangelog extends Plugin {
   async init() {
     await super.init();
-    const { filename, strictLatest, addUnreleased, keepUnreleased, addVersionUrl, versionUrlFormats, head } = this.options;
+    const { whatsNew, filename, strictLatest, addUnreleased, keepUnreleased, addVersionUrl, versionUrlFormats, head } = this.options;
 
+    this.whatsNewContent = ''
     this.filename = filename || 'CHANGELOG.md';
+    this.whatsNew = whatsNew || 'whatsnew/whatsnew-en-US';
     this.strictLatest = strictLatest === undefined ? true : Boolean(strictLatest);
     this.addUnreleased = addUnreleased === undefined ? false : Boolean(addUnreleased);
     this.keepUnreleased = keepUnreleased === undefined ? false : Boolean(keepUnreleased);
@@ -40,6 +42,7 @@ class KeepAChangelog extends Plugin {
       : defaultVersionUrlFormats;
     this.head = head || 'HEAD';
 
+    this.whatsNewPath = path.resolve(this.whatsNew);
     this.changelogPath = path.resolve(this.filename);
     this.changelogContent = fs.readFileSync(this.changelogPath, 'utf-8');
     this.EOL = detectNewline(this.changelogContent);
@@ -65,10 +68,9 @@ class KeepAChangelog extends Plugin {
 
     const { isIncrement } = this.config;
     const titleToFind = isIncrement ? this.unreleasedTitleRaw : latestVersion;
-    const changelogContent = this.getChangelogEntryContent(titleToFind);
-
-    this.setContext({ changelog: changelogContent });
-    return changelogContent;
+    this.whatsNewContent = this.getChangelogEntryContent(titleToFind);    
+    this.setContext({ changelog: this.whatsNewContent });
+    return this.whatsNewContent;
   }
 
   getChangelogEntryContent(releaseTitleRaw) {
@@ -150,6 +152,7 @@ class KeepAChangelog extends Plugin {
     }
 
     fs.writeFileSync(this.changelogPath, changelog.trim() + this.EOL);
+    fs.writeFileSync(this.whatsNewPath, this.whatsNewContent);
   }
 }
 
